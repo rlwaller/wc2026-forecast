@@ -21,12 +21,12 @@
     --accent-soft:  #d9ebe1;
     --coral:        #c0573e;
     --gold:         #c08e3a;
-    --heat-0:       #f1ebde;
-    --heat-1:       #d9c8a0;
-    --heat-2:       #c0a06a;
-    --heat-3:       #946d2f;
-    --heat-4:       #6b3f18;
-    --heat-5:       #3d1f08;
+    --heat-0:       #faf6ef;   /* same as bg: zero / barely there */
+    --heat-1:       #fde4e0;   /* very light pink */
+    --heat-2:       #fac3bb;   /* light pink */
+    --heat-3:       #f0907f;   /* coral */
+    --heat-4:       #cc4a35;   /* warm red */
+    --heat-5:       #8a2818;   /* deep red */
     --shadow:       0 1px 2px rgba(20, 25, 40, 0.04), 0 4px 12px rgba(20, 25, 40, 0.04);
   }
 
@@ -311,21 +311,22 @@
     font-weight: 400;
   }
 
-  /* Heat-map shading: applied as background tint */
+  /* Heat-map shading: red ramp from pale pink to deep red */
   .match-slot.heat-0 { background: var(--heat-0); }
   .match-slot.heat-1 { background: var(--heat-1); }
-  .match-slot.heat-2 { background: var(--heat-2); color: white; }
+  .match-slot.heat-2 { background: var(--heat-2); }
   .match-slot.heat-3 { background: var(--heat-3); color: white; }
   .match-slot.heat-4 { background: var(--heat-4); color: white; }
   .match-slot.heat-5 { background: var(--heat-5); color: white; }
-  .match-slot.heat-2 .match-id,
-  .match-slot.heat-2 .match-venue,
+  .match-slot.heat-3 .match-prob,
+  .match-slot.heat-4 .match-prob,
+  .match-slot.heat-5 .match-prob { color: white; }
   .match-slot.heat-3 .match-id,
   .match-slot.heat-3 .match-venue,
   .match-slot.heat-4 .match-id,
   .match-slot.heat-4 .match-venue,
   .match-slot.heat-5 .match-id,
-  .match-slot.heat-5 .match-venue { color: rgba(255,255,255,0.7); }
+  .match-slot.heat-5 .match-venue { color: rgba(255,255,255,0.85); }
 
   /* Connector SVG */
   .connector-svg {
