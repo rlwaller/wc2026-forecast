@@ -1,0 +1,212 @@
+﻿code,country,confederation,FIFA,PELE,shape
+ARG,Argentina,CONMEBOL,3,1,up
+ESP,Spain,UEFA,2,2,circle
+ENG,England,UEFA,4,3,up
+FRA,France,UEFA,1,4,down
+BRA,Brazil,CONMEBOL,6,5,up
+POR,Portugal,UEFA,5,6,down
+GER,Germany,UEFA,10,7,up
+COL,Colombia,CONMEBOL,13,8,up
+NED,Netherlands,UEFA,7,9,down
+URU,Uruguay,CONMEBOL,17,10,up
+NOR,Norway,UEFA,31,11,up
+ECU,Ecuador,CONMEBOL,23,12,up
+SEN,Senegal,CAF,14,13,up
+JPN,Japan,AFC,18,14,up
+ITA,Italy,UEFA,12,15,down
+TUR,Turkey,UEFA,22,16,up
+BEL,Belgium,UEFA,9,17,down
+SUI,Switzerland,UEFA,19,18,up
+CRO,Croatia,UEFA,11,19,down
+PAR,Paraguay,CONMEBOL,40,20,up
+DEN,Denmark,UEFA,20,21,down
+MAR,Morocco,CAF,8,22,down
+MEX,Mexico,CONCACAF,15,23,down
+RUS,Russia,UEFA,36,24,up
+AUT,Austria,UEFA,24,25,down
+NGA,Nigeria,CAF,26,26,circle
+CAN,Canada,CONCACAF,30,27,up
+SCO,Scotland,UEFA,43,28,up
+ALG,Algeria,CAF,28,29,down
+AUS,Australia,AFC,27,30,down
+GRE,Greece,UEFA,47,31,up
+SWE,Sweden,UEFA,38,32,up
+CIV,Cote d'Ivoire,CAF,34,33,up
+VEN,Venezuela,CONMEBOL,49,34,up
+CHI,Chile,CONMEBOL,54,35,up
+UKR,Ukraine,UEFA,32,36,down
+USA,United States,CONCACAF,16,37,down
+KOR,South Korea,AFC,25,38,down
+POL,Poland,UEFA,35,39,down
+SRB,Serbia,UEFA,39,40,down
+EGY,Egypt,CAF,29,41,down
+CZE,Czechia,UEFA,41,42,down
+HUN,Hungary,UEFA,42,43,down
+PAN,Panama,CONCACAF,33,44,down
+WAL,Wales,UEFA,37,45,down
+IRL,Rep. Ireland,UEFA,59,46,up
+COD,Dem. Rep. Congo,CAF,46,47,down
+PER,Peru,CONMEBOL,53,48,up
+KOS,Kosovo,UEFA,78,49,up
+IRN,Iran,AFC,21,50,down
+SVN,Slovenia,UEFA,58,51,up
+SVK,Slovakia,UEFA,48,52,down
+MLI,Mali,CAF,52,53,down
+CMR,Cameroon,CAF,45,54,down
+ISR,Israel,UEFA,77,55,up
+ROU,Romania,UEFA,56,56,circle
+TUN,Tunisia,CAF,44,57,down
+GEO,Georgia,UEFA,72,58,up
+UZB,Uzbekistan,AFC,50,59,down
+ALB,Albania,UEFA,64,60,up
+BIH,Bosnia/Herzegovina,UEFA,65,61,up
+CRC,Costa Rica,CONCACAF,51,62,down
+GHA,Ghana,CAF,74,63,up
+BFA,Burkina Faso,CAF,62,64,down
+NIR,Northern Ireland,UEFA,70,65,up
+RSA,South Africa,CAF,60,66,down
+ISL,Iceland,UEFA,75,67,up
+BOL,Bolivia,CONMEBOL,76,68,up
+JOR,Jordan,AFC,63,69,down
+NZL,New Zealand,OFC,85,70,up
+HON,Honduras,CONCACAF,66,71,down
+IRQ,Iraq,AFC,57,72,down
+KSA,Saudi Arabia,AFC,61,73,down
+MKD,North Macedonia,UEFA,67,74,down
+HAI,Haiti,CONCACAF,83,75,up
+GUI,Guinea,CAF,80,76,up
+CPV,Cape Verde,CAF,69,77,down
+FIN,Finland,UEFA,73,78,down
+ANG,Angola,CAF,89,79,up
+JAM,Jamaica,CONCACAF,71,80,down
+UAE,Unit. Arab Emir.,AFC,68,81,down
+GUA,Guatemala,CONCACAF,96,82,up
+GAM,Gambia,CAF,116,83,up
+SUR,Suriname,CONCACAF,125,84,up
+BLR,Belarus,UEFA,97,85,up
+CUW,Curacao,CONCACAF,82,86,down
+BUL,Bulgaria,UEFA,86,87,down
+DOM,Dominican Rep.,CONCACAF,143,88,up
+BEN,Benin,CAF,90,89,up
+GAB,Gabon,CAF,87,90,down
+LUX,Luxembourg,UEFA,98,91,up
+NIG,Niger,CAF,114,92,up
+KAZ,Kazakhstan,UEFA,110,93,up
+MNE,Montenegro,UEFA,81,94,down
+QAT,Qatar,AFC,55,95,down
+COM,Comoros,CAF,109,96,up
+PLE,Palestine,AFC,95,97,down
+OMA,Oman,AFC,79,98,down
+LBY,Libya,CAF,112,99,up
+CHN,China,AFC,94,100,down
+SLE,Sierra Leone,CAF,119,101,up
+SYR,Syria,AFC,84,102,down
+ZAM,Zambia,CAF,92,103,down
+UGA,Uganda,CAF,88,104,down
+TRI,Trinidad & Tobago,CONCACAF,102,105,down
+TOG,Togo,CAF,121,106,up
+MOZ,Mozambique,CAF,101,107,down
+ZIM,Zimbabwe,CAF,130,108,up
+MAD,Madagascar,CAF,104,109,down
+EQG,Equatorial Guinea,CAF,105,110,down
+NCA,Nicaragua,CONCACAF,131,111,up
+ARM,Armenia,UEFA,106,112,down
+KEN,Kenya,CAF,111,113,down
+TAN,Tanzania,CAF,113,114,down
+SLV,El Salvador,CONCACAF,100,115,down
+FRO,Faroe Islands,UEFA,123,116,up
+BHR,Bahrain,AFC,91,117,down
+SDN,Sudan,CAF,117,118,down
+AZE,Azerbaijan,UEFA,124,119,up
+MTN,Mauritania,CAF,115,120,down
+LVA,Latvia,UEFA,137,121,up
+EST,Estonia,UEFA,129,122,up
+BDI,Burundi,CAF,142,123,up
+RWA,Rwanda,CAF,128,124,up
+CYP,Cyprus,UEFA,126,125,up
+PRK,North Korea,AFC,118,126,down
+GNB,Guinea-Bissau,CAF,132,127,up
+LTU,Lithuania,UEFA,148,128,up
+IDN,Indonesia,AFC,122,129,down
+LBR,Liberia,CAF,140,130,up
+PUR,Puerto Rico,CONCACAF,156,131,up
+CUB,Cuba,CONCACAF,164,132,up
+GUY,Guyana,CONCACAF,150,133,up
+ETH,Ethiopia,CAF,144,134,up
+THA,Thailand,AFC,93,135,down
+NAM,Namibia,CAF,120,136,down
+CTA,Cent. Afr. Rep.,CAF,139,137,up
+CGO,"Rep, Congo",CAF,133,138,down
+LBN,Lebanon,AFC,108,139,down
+MLT,Malta,UEFA,161,140,up
+KUW,Kuwait,AFC,134,141,down
+TJK,Tajikistan,AFC,103,142,down
+BOT,Botswana,CAF,146,143,up
+MDA,Moldova,UEFA,159,144,up
+KGZ,Kyrgyzstan,AFC,107,145,down
+VIE,Vietnam,AFC,99,146,down
+ERI,Eritrea,CAF,184,147,up
+MWI,Malawi,CAF,127,148,down
+MAS,Malaysia,AFC,138,149,down
+LES,Lesotho,CAF,145,150,down
+NCL,New Caledonia,OFC,151,151,circle
+VIN,St. Vincent/Grenadines,CONCACAF,171,152,up
+TKM,Turkmenistan,AFC,141,153,down
+YEM,Yemen,AFC,149,154,down
+PHI,Philippines,AFC,135,155,down
+SSD,South Sudan,CAF,170,156,up
+GRN,Grenada,CONCACAF,163,157,up
+CHA,Chad,CAF,183,158,up
+SWZ,Eswatini,CAF,165,159,up
+BER,Bermuda,CONCACAF,166,160,up
+AND,Andorra,UEFA,173,161,up
+SOM,Somalia,CAF,198,162,up
+IND,India,AFC,136,163,down
+MRI,Mauritius,CAF,178,164,up
+HKG,Hong Kong,AFC,155,165,down
+ARU,Aruba,CONCACAF,189,166,up
+SGP,Singapore,AFC,147,167,down
+STP,Sao Tome/Principe,CAF,196,168,up
+SKN,St. Kitts & Nevis,CONCACAF,152,169,down
+LCA,Saint Lucia,CONCACAF,167,170,down
+BLZ,Belize,CONCACAF,180,171,up
+MSR,Montserrat,CONCACAF,175,172,up
+FIJ,Fiji,OFC,154,173,down
+BRB,Barbados,CONCACAF,179,174,up
+TAH,Tahiti,OFC,157,175,down
+DJI,Djibouti,CAF,197,176,up
+ATG,Antigua & Barbuda,CONCACAF,162,177,down
+GIB,Gibraltar,UEFA,203,178,up
+PNG,Papua New Guinea,OFC,168,179,down
+SOL,Solomon Islands,OFC,153,180,down
+LIE,Liechtenstein,UEFA,206,181,up
+DMA,Dominica,CONCACAF,182,182,circle
+AFG,Afghanistan,AFC,169,183,down
+MYA,Myanmar,AFC,158,184,down
+VAN,Vanuatu,OFC,160,185,down
+BAN,Bangladesh,AFC,181,186,down
+SEY,Seychelles,CAF,204,187,up
+CAY,Cayman Islands,CONCACAF,195,188,up
+SMR,San Marino,UEFA,211,189,up
+TPE,Taiwan,AFC,174,190,down
+CAM,Cambodia,AFC,177,191,down
+SRI,Sri Lanka,AFC,191,192,down
+NEP,Nepal,AFC,176,193,down
+PAK,Pakistan,AFC,202,194,up
+VGB,Brit. Virgin Islands,CONCACAF,208,195,up
+BAH,Bahamas,CONCACAF,207,196,up
+MDV,Maldives,AFC,172,197,down
+LAO,Laos,AFC,185,198,down
+MNG,Mongolia,AFC,187,199,down
+GUM,Guam,AFC,201,200,up
+VIR,U.S. Virgin Islands,CONCACAF,209,201,up
+AIA,Anguilla,CONCACAF,210,202,up
+SAM,Samoa,OFC,190,203,down
+TLS,Timor-Leste,AFC,200,204,down
+TCA,Turks and Caicos,CONCACAF,205,205,circle
+MAC,Macau,AFC,194,206,down
+BRU,Brunei,AFC,193,207,down
+COK,Cook Islands,OFC,188,208,down
+BHU,Bhutan,AFC,186,209,down
+TGA,Tonga,OFC,199,210,down
+ASA,American Samoa,OFC,192,211,down
