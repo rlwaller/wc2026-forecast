@@ -60,7 +60,7 @@ ANNEX_C_TABLE = _annex_c_lookup_table()
 class OptimizedSimulator:
     """Pre-builds the data structures needed for fast batch simulation."""
 
-    def __init__(self, team_data, hfa_data, group_match_data):
+    def __init__(self, team_data, hfa_data, group_match_data, fixed_results=None):
         self.team_data = team_data
         self.hfa_data = hfa_data
         self.group_match_data = group_match_data
@@ -70,12 +70,35 @@ class OptimizedSimulator:
         # Pre-compute group-stage score matrices and CDFs
         self._build_group_cdfs()
 
+        # Fixed (already-played) group results: {match_index: (score_a, score_b)}
+        # built from the team-keyed dict passed in
+        self.fixed_scores = self._resolve_fixed_results(fixed_results or {})
+
         # Cache for knockout score matrices: key = (lam_a_rounded, lam_b_rounded)
         # since we get many repeated matchups across sims
         self._knockout_cache = {}
 
         # Pre-extract team rating arrays for vectorized lookups
         self._build_team_arrays()
+
+    def _resolve_fixed_results(self, fixed_results):
+        """Map team-pair-keyed results onto group-match indices.
+
+        fixed_results: {(team_a, team_b): (score_a, score_b)} in either orientation.
+        Returns: {match_index: (score_a_oriented, score_b_oriented)} aligned to
+        the simulator's internal team_a/team_b ordering for that match.
+        """
+        resolved = {}
+        for i in range(len(self.group_team_a)):
+            ta = self.group_team_a[i]
+            tb = self.group_team_b[i]
+            if (ta, tb) in fixed_results:
+                resolved[i] = tuple(fixed_results[(ta, tb)])
+            elif (tb, ta) in fixed_results:
+                # Flip the score to match internal ordering
+                sb, sa = fixed_results[(tb, ta)]
+                resolved[i] = (sa, sb)
+        return resolved
 
     def _build_group_cdfs(self):
         """Pre-compute CDF for each of the 72 group matches."""
@@ -197,6 +220,14 @@ class OptimizedSimulator:
         idx = np.array([np.searchsorted(self.group_cdfs[i], u[i]) for i in range(72)])
         score_a = idx // 11
         score_b = idx % 11
+
+        # Override sampled scores with real results for already-played matches
+        if self.fixed_scores:
+            score_a = score_a.copy()
+            score_b = score_b.copy()
+            for i, (sa, sb) in self.fixed_scores.items():
+                score_a[i] = sa
+                score_b[i] = sb
 
         # Build standings per group
         team_pts = {}

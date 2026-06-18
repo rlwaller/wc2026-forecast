@@ -1,0 +1,53 @@
+name: Auto-update forecast
+
+on:
+  # Run a few times a day (UTC). Catches finished matches a few hours later.
+  schedule:
+    - cron: '0 4 * * *'    # ~midnight US Eastern
+    - cron: '0 12 * * *'   # morning
+    - cron: '0 20 * * *'   # afternoon
+  workflow_dispatch:        # manual trigger button
+  push:
+    paths:
+      - 'data/**'
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Fetch latest results from ESPN
+        run: |
+          cd src
+          python3 fetch_results.py
+        continue-on-error: true
+
+      - name: Regenerate forecast
+        run: |
+          cd src
+          python3 generate_forecast.py 20000
+
+      - name: Commit changes if any
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/results.txt docs/forecast.json
+          if git diff --staged --quiet; then
+            echo "No changes — nothing to commit."
+          else
+            git commit -m "Auto-update: results + forecast ($(date -u +'%Y-%m-%d %H:%M UTC'))"
+            git push
+          fi

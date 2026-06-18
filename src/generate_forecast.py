@@ -19,6 +19,7 @@ from bracket import (
 from simulator_optimized import OptimizedSimulator
 from load_data import load_team_ratings, load_matches
 from load_hfa import load_hfa
+from load_results import load_results
 
 
 def slot_spec_to_dict(spec):
@@ -37,8 +38,10 @@ def slot_spec_to_dict(spec):
     return {"type": "unknown", "raw": str(spec)}
 
 
-def build_forecast_json(summary, slot_probs, team_data, hfa_data, n_sims):
+def build_forecast_json(summary, slot_probs, team_data, hfa_data, n_sims,
+                        fixed_results=None):
     """Build the complete forecast JSON structure."""
+    fixed_results = fixed_results or {}
     # Knockout match metadata
     knockout_matches = []
     for matches, round_name in [
@@ -99,12 +102,26 @@ def build_forecast_json(summary, slot_probs, team_data, hfa_data, n_sims):
                 match_team_probs[mid_str] = {}
             match_team_probs[mid_str][team] = round(prob, 4)
 
+    # Played results, with group labels, for the website's "results so far" strip
+    played_results = []
+    for (ta, tb), (sa, sb) in fixed_results.items():
+        played_results.append({
+            "team_a": ta,
+            "team_b": tb,
+            "score_a": sa,
+            "score_b": sb,
+            "group": TEAM_GROUP.get(ta, "?"),
+        })
+    # Sort by group, then teams, for stable display
+    played_results.sort(key=lambda r: (r["group"], r["team_a"], r["team_b"]))
+
     return {
         "metadata": {
             "n_simulations": n_sims,
             "generated_at": datetime.datetime.now(datetime.timezone.utc).isoformat(),
             "model": "PELE v5 (split-HFA) + Dixon-Coles NegBin",
             "format": "FIFA 2026 World Cup (48 teams, 12 groups of 4)",
+            "matches_played": len(played_results),
         },
         "groups": {g: teams for g, teams in GROUPS.items()},
         "venues": VENUES,
@@ -112,6 +129,7 @@ def build_forecast_json(summary, slot_probs, team_data, hfa_data, n_sims):
         "team_summary": team_summary,
         "team_slot_probabilities": team_slot_probs,
         "match_team_probabilities": match_team_probs,
+        "played_results": played_results,
     }
 
 
@@ -134,16 +152,25 @@ def main(n_sims=20000, output_path=None, seed=42):
     group_matches = all_matches[all_matches["comp_tier"] == 9].copy().reset_index(drop=True)
     group_matches["group"] = group_matches["team_a"].map(TEAM_GROUP)
 
+    fixed_results = load_results()
+
     print(f"  Loaded {len(teams)} teams, {len(hfa)} HFA values, {len(group_matches)} group matches")
+    if fixed_results:
+        print(f"  Loaded {len(fixed_results)} already-played match result(s):")
+        for (ta, tb), (sa, sb) in fixed_results.items():
+            print(f"    {ta} {sa}-{sb} {tb}")
+    else:
+        print("  No played results recorded — simulating all 72 group matches.")
     print()
 
     print("[2/3] Running Monte Carlo simulation...")
-    sim = OptimizedSimulator(teams, hfa, group_matches)
+    sim = OptimizedSimulator(teams, hfa, group_matches, fixed_results=fixed_results)
     summary, slot_probs = sim.run_monte_carlo(n_sims, seed=seed, verbose=True)
     print()
 
     print("[3/3] Building JSON output...")
-    forecast = build_forecast_json(summary, slot_probs, teams, hfa, n_sims)
+    forecast = build_forecast_json(summary, slot_probs, teams, hfa, n_sims,
+                                   fixed_results=fixed_results)
     with open(output_path, "w") as f:
         json.dump(forecast, f, separators=(",", ":"))  # compact
     file_size = Path(output_path).stat().st_size

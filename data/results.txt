@@ -1,0 +1,10 @@
+# Group-stage results — AUTO-GENERATED from ESPN by fetch_results.py
+#
+# Do not hand-edit during the tournament; this file is overwritten on each
+# automatic update. To manually override a result, edit the script's logic
+# or temporarily disable the GitHub Action.
+#
+# Format: TEAM_A TEAM_B score_a score_b
+# Only FINISHED group-stage matches are listed.
+
+# --- Played matches below ---

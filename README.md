@@ -76,14 +76,35 @@ python3 -m http.server 8000
 
 ## Updating the forecast
 
-When Silver Bulletin's ratings change:
+The forecast updates automatically. A GitHub Actions workflow
+(`.github/workflows/update_forecast.yml`) runs a few times a day during the
+tournament. Each run:
 
-1. Re-export the CSV files from your Silver Bulletin subscription
-2. Replace the files in `data/` (keep the same filenames)
-3. Run `cd src && python3 generate_forecast.py 20000` to regenerate `docs/forecast.json`
-4. Commit and push — GitHub Pages will redeploy automatically
+1. Fetches finished match scores from ESPN's public API (`fetch_results.py`)
+2. Writes them into `data/results.txt`
+3. Regenerates `docs/forecast.json`, conditioning the simulation on results so far
+4. Commits and pushes only if something changed (which redeploys the site)
 
-Or, set up the included GitHub Actions workflow to run this on a schedule.
+You don't need to do anything once it's set up. To trigger a refresh manually,
+go to the **Actions** tab → "Auto-update forecast" → **Run workflow**.
+
+### Manual override
+
+To record a result by hand (e.g. ESPN is wrong or slow), edit `data/results.txt`:
+
+```
+MEX RSA 2 1
+KOR CZE 0 0
+```
+
+One line per match: `TEAM_A TEAM_B score_a score_b`, using the 3-letter codes.
+Team order doesn't matter. Note that the next automatic run will overwrite this
+file with ESPN's data, so manual edits are temporary.
+
+### Updating Silver's ratings
+
+When Silver Bulletin publishes new ratings, re-export the CSVs into `data/`
+(keeping the same filenames) and commit. The next forecast run uses them.
 
 ## The model
 

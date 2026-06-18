@@ -21,12 +21,12 @@
     --accent-soft:  #d9ebe1;
     --coral:        #c0573e;
     --gold:         #c08e3a;
-    --heat-0:       #faf6ef;   /* same as bg: zero / barely there */
-    --heat-1:       #fde4e0;   /* very light pink */
-    --heat-2:       #fac3bb;   /* light pink */
-    --heat-3:       #f0907f;   /* coral */
-    --heat-4:       #cc4a35;   /* warm red */
-    --heat-5:       #8a2818;   /* deep red */
+    --heat-0:       #f1ebde;
+    --heat-1:       #d9c8a0;
+    --heat-2:       #c0a06a;
+    --heat-3:       #946d2f;
+    --heat-4:       #6b3f18;
+    --heat-5:       #3d1f08;
     --shadow:       0 1px 2px rgba(20, 25, 40, 0.04), 0 4px 12px rgba(20, 25, 40, 0.04);
   }
 
@@ -92,6 +92,55 @@
     color: var(--ink-soft);
     font-weight: 600;
   }
+
+  /* Results-so-far strip */
+  .results-strip {
+    margin-bottom: 28px;
+    padding: 14px 18px;
+    background: var(--accent-soft);
+    border: 1px solid var(--rule-soft);
+    border-radius: 4px;
+  }
+  .results-strip-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 700;
+    color: var(--accent-deep);
+    margin-bottom: 10px;
+  }
+  .results-strip-scroll {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+  }
+  .result-chip {
+    flex: 0 0 auto;
+    background: white;
+    border: 1px solid var(--rule);
+    border-radius: 3px;
+    padding: 6px 10px;
+    font-size: 13px;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+  }
+  .result-chip .grp {
+    font-family: 'Fraunces', serif;
+    font-size: 10px;
+    color: var(--ink-faint);
+    font-weight: 600;
+  }
+  .result-chip .matchup { font-weight: 500; color: var(--ink); }
+  .result-chip .score {
+    font-weight: 700;
+    color: var(--accent-deep);
+    font-family: 'Fraunces', serif;
+  }
+  .result-chip .winner { color: var(--accent-deep); }
 
   /* Tabs */
   .tabs {
@@ -311,22 +360,21 @@
     font-weight: 400;
   }
 
-  /* Heat-map shading: red ramp from pale pink to deep red */
+  /* Heat-map shading: applied as background tint */
   .match-slot.heat-0 { background: var(--heat-0); }
   .match-slot.heat-1 { background: var(--heat-1); }
-  .match-slot.heat-2 { background: var(--heat-2); }
+  .match-slot.heat-2 { background: var(--heat-2); color: white; }
   .match-slot.heat-3 { background: var(--heat-3); color: white; }
   .match-slot.heat-4 { background: var(--heat-4); color: white; }
   .match-slot.heat-5 { background: var(--heat-5); color: white; }
-  .match-slot.heat-3 .match-prob,
-  .match-slot.heat-4 .match-prob,
-  .match-slot.heat-5 .match-prob { color: white; }
+  .match-slot.heat-2 .match-id,
+  .match-slot.heat-2 .match-venue,
   .match-slot.heat-3 .match-id,
   .match-slot.heat-3 .match-venue,
   .match-slot.heat-4 .match-id,
   .match-slot.heat-4 .match-venue,
   .match-slot.heat-5 .match-id,
-  .match-slot.heat-5 .match-venue { color: rgba(255,255,255,0.85); }
+  .match-slot.heat-5 .match-venue { color: rgba(255,255,255,0.7); }
 
   /* Connector SVG */
   .connector-svg {
@@ -485,6 +533,14 @@
       </div>
     </div>
   </header>
+
+  <!-- Results so far strip -->
+  <div id="results-strip" class="results-strip" style="display:none;">
+    <div class="results-strip-label">
+      <span id="results-count">0</span> of 72 group matches played
+    </div>
+    <div class="results-strip-scroll" id="results-strip-scroll"></div>
+  </div>
 
   <nav class="tabs">
     <button class="tab active" data-tab="forecast">Forecast Table</button>
@@ -658,9 +714,47 @@ function init() {
   });
 
   // Initial renders
+  renderResultsStrip();
   renderForecastTable();
   renderGroups();
   renderBracket();
+}
+
+// ============================================================
+// Results-so-far strip
+// ============================================================
+function renderResultsStrip() {
+  const strip = document.getElementById('results-strip');
+  const scroll = document.getElementById('results-strip-scroll');
+  const countEl = document.getElementById('results-count');
+  const results = forecastData.played_results || [];
+
+  countEl.textContent = results.length;
+
+  if (results.length === 0) {
+    // Before the tournament: show a quiet "not started" note instead of hiding
+    strip.style.display = 'block';
+    scroll.innerHTML = '<div style="font-size:13px;color:var(--ink-soft);font-style:italic;">No matches played yet — the forecast shows pre-tournament probabilities. Results will appear here as games finish.</div>';
+    return;
+  }
+
+  strip.style.display = 'block';
+  scroll.innerHTML = '';
+  for (const r of results) {
+    const aWins = r.score_a > r.score_b;
+    const bWins = r.score_b > r.score_a;
+    const chip = document.createElement('div');
+    chip.className = 'result-chip';
+    chip.innerHTML = `
+      <span class="grp">${r.group}</span>
+      <span class="matchup">
+        <span class="${aWins ? 'winner' : ''}">${r.team_a}</span>
+        <span class="score">${r.score_a}–${r.score_b}</span>
+        <span class="${bWins ? 'winner' : ''}">${r.team_b}</span>
+      </span>
+    `;
+    scroll.appendChild(chip);
+  }
 }
 
 // ============================================================
