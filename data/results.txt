@@ -9,6 +9,7 @@
 
 # --- Played matches below ---
 ARG ALG 3 0
+ARG AUT 2 0
 AUS TUR 2 0
 AUT JOR 3 1
 BEL EGY 1 1
